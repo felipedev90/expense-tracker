@@ -1,3 +1,4 @@
+import { formatCurrency } from "../utils/currencyFormatter";
 import type { Expense } from "../types/expense";
 
 interface ExpenseItemProps {
@@ -13,13 +14,7 @@ export default function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
         {expense.description} <br />
       </div>
       <div>
-        <strong>Valor:</strong>{" "}
-        <span>
-          {expense.amount.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-          })}
-        </span>{" "}
+        <strong>Valor:</strong> <span>{formatCurrency(expense.amount)}</span>{" "}
         <br />
       </div>
       <div>
