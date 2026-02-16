@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Expense, ExpenseFormData } from "./types/expense";
 import Header from "./components/Header";
+import ExpenseForm from "./components/ExpenseForm";
 
 function App() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -23,6 +24,7 @@ function App() {
     <div>
       <Header />
       <p>Total de despesas: {expenses.length}</p>
+      <ExpenseForm addExpense={addExpenseHandler} />
     </div>
   );
 }
