@@ -1,7 +1,28 @@
+import { useState } from "react";
+import type { Expense, ExpenseFormData } from "./types/expense";
+import Header from "./components/Header";
+
 function App() {
+  const [expenses, setExpenses] = useState<Expense[]>([]);
+
+  function addExpenseHandler(expenseData: ExpenseFormData) {
+    const newId = crypto.randomUUID();
+
+    setExpenses((prevExpenses) => {
+      return [...prevExpenses, { ...expenseData, id: newId }];
+    });
+  }
+
+  function deleteExpenseHandler(id: string) {
+    setExpenses((prevExpenses) => {
+      return prevExpenses.filter((expense) => expense.id !== id);
+    });
+  }
+
   return (
     <div>
-      <h1>Hey React!</h1>
+      <Header />
+      <p>Total de despesas: {expenses.length}</p>
     </div>
   );
 }

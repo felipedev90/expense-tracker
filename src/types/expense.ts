@@ -7,3 +7,5 @@ export interface Expense {
 }
 
 export type Category = "Alimentação" | "Saúde" | "Lazer" | "Bike" | "Outros";
+
+export type ExpenseFormData = Omit<Expense, "id">;
