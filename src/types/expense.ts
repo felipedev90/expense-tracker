@@ -17,3 +17,7 @@ export const CATEGORY_CONFIG = {
   Bike: { color: "#F38181", icon: "🚴" },
   Outros: { color: "#A8E6CF", icon: "📦" },
 } as const;
+
+export const categories: Category[] = Object.keys(
+  CATEGORY_CONFIG,
+) as Category[];
