@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ExpenseForm from "./components/ExpenseForm";
@@ -7,7 +7,25 @@ import { formatCurrency } from "./utils/currencyFormatter";
 import type { Expense, ExpenseFormData } from "./types/expense";
 
 function App() {
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [expenses, setExpenses] = useState<Expense[]>(() => {
+    try {
+      const saved = localStorage.getItem("expense-tracker-expenses");
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      console.error("Erro ao carregar do localStorage:", error);
+      return [];
+    }
+  });
+
+  const STORAGE_KEY = "expense-tracker-expenses";
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(expenses));
+    } catch (error) {
+      console.error("Erro ao salvar no localStorage:", error);
+    }
+  }, [expenses]);
 
   function addExpenseHandler(expenseData: ExpenseFormData) {
     const newId = crypto.randomUUID();
