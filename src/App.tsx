@@ -1,13 +1,16 @@
-import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import { formatCurrency } from "./utils/currencyFormatter";
 import type { Expense, ExpenseFormData } from "./types/expense";
 
 function App() {
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [expenses, setExpenses] = useLocalStorage<Expense[]>(
+    "expense-tracker-expenses",
+    [],
+  );
 
   function addExpenseHandler(expenseData: ExpenseFormData) {
     const newId = crypto.randomUUID();
