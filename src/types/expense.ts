@@ -6,9 +6,9 @@ export interface Expense {
   category: Category;
 }
 
-export type Category = "Alimentação" | "Saúde" | "Lazer" | "Bike" | "Outros";
-
 export type ExpenseFormData = Omit<Expense, "id">;
+export type Category = "Alimentação" | "Saúde" | "Lazer" | "Bike" | "Outros";
+export type Period = "Todos" | "Últimos 7 dias" | "Últimos 30 dias";
 
 export const CATEGORY_CONFIG = {
   Alimentação: { color: "#FF6B6B", icon: "🍔" },
