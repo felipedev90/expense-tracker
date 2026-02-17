@@ -1,6 +1,6 @@
-import { formatCurrency } from "../utils/currencyFormatter";
-import { CATEGORY_CONFIG } from "../types/expense";
-import type { Expense } from "../types/expense";
+import { formatCurrency } from "../../utils/currencyFormatter";
+import { CATEGORY_CONFIG } from "../../types/expense";
+import type { Expense } from "../../types/expense";
 
 interface ExpenseItemProps {
   expense: Expense;

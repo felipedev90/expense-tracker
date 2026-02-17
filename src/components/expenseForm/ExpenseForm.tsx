@@ -1,17 +1,6 @@
 import { useState } from "react";
-import {
-  type ExpenseFormData,
-  type Category,
-  CATEGORY_CONFIG,
-} from "../types/expense";
-
-const categories: Category[] = [
-  "Alimentação",
-  "Saúde",
-  "Lazer",
-  "Bike",
-  "Outros",
-];
+import { CATEGORY_CONFIG, categories } from "../../types/expense";
+import type { ExpenseFormData, Category } from "../../types/expense";
 
 interface ExpenseFormProps {
   addExpense: (expenseData: ExpenseFormData) => void;

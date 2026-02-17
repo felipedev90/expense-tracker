@@ -1,5 +1,5 @@
-import ExpenseItem from "./ExpenseItem";
-import type { Expense } from "../types/expense";
+import ExpenseItem from "../expenseItem/ExpenseItem";
+import type { Expense } from "../../types/expense";
 
 interface ExpenseListProps {
   expenses: Expense[];
