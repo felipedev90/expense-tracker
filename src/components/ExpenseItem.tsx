@@ -1,4 +1,5 @@
 import { formatCurrency } from "../utils/currencyFormatter";
+import { CATEGORY_CONFIG } from "../types/expense";
 import type { Expense } from "../types/expense";
 
 interface ExpenseItemProps {
@@ -7,6 +8,8 @@ interface ExpenseItemProps {
 }
 
 export default function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
+  const categoryInfo = CATEGORY_CONFIG[expense.category];
+
   return (
     <li>
       <div>
@@ -25,7 +28,10 @@ export default function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
         <br />
       </div>
       <div>
-        <strong>Categoria:</strong> {expense.category}
+        <strong>Categoria:</strong>
+        <span style={{ color: categoryInfo.color }}>
+          {categoryInfo.icon} {expense.category}
+        </span>
         <br />
       </div>
       <div>

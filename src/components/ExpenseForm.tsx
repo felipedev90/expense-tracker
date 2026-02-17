@@ -1,5 +1,9 @@
 import { useState } from "react";
-import type { ExpenseFormData, Category } from "../types/expense";
+import {
+  type ExpenseFormData,
+  type Category,
+  CATEGORY_CONFIG,
+} from "../types/expense";
 
 const categories: Category[] = [
   "Alimentação",
@@ -76,7 +80,7 @@ export default function ExpenseForm({ addExpense }: ExpenseFormProps) {
       >
         {categories.map((cat) => (
           <option key={cat} value={cat}>
-            {cat}
+            {CATEGORY_CONFIG[cat].icon} {cat}
           </option>
         ))}
       </select>
