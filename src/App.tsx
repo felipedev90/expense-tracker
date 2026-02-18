@@ -76,18 +76,21 @@ function App() {
   return (
     <div>
       <Header />
-      <Filters
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedPeriod={selectedPeriod}
-        setSelectedPeriod={setSelectedPeriod}
-      />
       <ExpenseSummary
         totalExpenses={filteredExpenses.length}
         totalAmount={totalDeGastos}
       />
 
       <ExpenseForm addExpense={addExpenseHandler} />
+
+      {expenses.length > 0 && (
+        <Filters
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedPeriod={selectedPeriod}
+          setSelectedPeriod={setSelectedPeriod}
+        />
+      )}
       <ExpenseList
         expenses={filteredExpenses}
         onDelete={deleteExpenseHandler}

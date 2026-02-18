@@ -1,0 +1,143 @@
+.formContainer {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+
+  background: linear-gradient(180deg, #ffffff 0%, var(--color-gray-50) 100%);
+  border: 1px solid var(--color-gray-200);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-lg);
+
+  font-family: var(--font-sans);
+  color: var(--color-gray-900);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.title {
+  color: var(--color-gray-700);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin-top: var(--space-xs);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--space-sm);
+
+  font-size: var(--font-size-base);
+  color: var(--color-gray-900);
+
+  background: #fff;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.input::placeholder {
+  color: rgba(55, 65, 81, 0.55);
+}
+
+.input:hover {
+  border-color: rgba(102, 126, 234, 0.45);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.18);
+}
+
+.input[type="date"] {
+  padding-right: var(--space-sm);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-md);
+}
+
+.buttonAdd {
+  height: 46px;
+  padding: 0 var(--space-lg);
+  border: 0;
+  border-radius: calc(var(--radius-md) + 2px);
+
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #fff;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  box-shadow: var(--shadow-md);
+
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    filter 140ms ease;
+}
+
+.buttonAdd:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  filter: brightness(1.02);
+}
+
+.buttonAdd:active {
+  transform: translateY(0px);
+  box-shadow: var(--shadow-md);
+}
+
+.buttonAdd:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(118, 75, 162, 0.22),
+    var(--shadow-lg);
+}
+
+/* Estado desabilitado (se você quiser usar depois) */
+.buttonAdd:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  filter: grayscale(0.1);
+  transform: none;
+}
+
+@media (max-width: 520px) {
+  .formContainer {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .buttonContainer {
+    justify-content: stretch;
+  }
+
+  .buttonAdd {
+    width: 100%;
+  }
+}

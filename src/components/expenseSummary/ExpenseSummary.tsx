@@ -1,4 +1,5 @@
 import { formatCurrency } from "../../utils/currencyFormatter";
+import styles from "./ExpenseSummary.module.css";
 
 export default function ExpenseSummary({
   totalExpenses,
@@ -8,9 +9,17 @@ export default function ExpenseSummary({
   totalAmount: number;
 }) {
   return (
-    <div>
-      <p>Total de despesas: {totalExpenses}</p>
-      <p>Total gasto: {formatCurrency(totalAmount)}</p>
+    <div className={styles.summaryContainer}>
+      <div className={styles.summaryInfo}>
+        <p className={styles.summaryText}>TOTAL DE DESPESAS</p>
+        <span className={styles.summarySpanExpense}>{totalExpenses}</span>
+      </div>
+      <div className={styles.summaryInfo}>
+        <p className={styles.summaryText}>TOTAL GASTO </p>
+        <span className={styles.summarySpanTotal}>
+          {formatCurrency(totalAmount)}
+        </span>
+      </div>
     </div>
   );
 }

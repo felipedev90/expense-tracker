@@ -1,24 +1,24 @@
 .headerContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  background: white;
 
-  padding: 20px;
-  background-color: #000040;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-lg);
+
+  text-align: center;
+  box-shadow: var(--shadow-lg);
 }
 
-.title h1 {
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.subtitle {
   margin: 0;
-  font-size: 2.5rem;
-  color: #ffffff;
-}
-
-.subtitle p {
-  margin: 5px 0 0;
-  font-size: 1.2rem;
-  color: #e4e4e4;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-700);
 }
 
 @media (max-width: 720px) {

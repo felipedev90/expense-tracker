@@ -1,5 +1,7 @@
 import { formatCurrency } from "../../utils/currencyFormatter";
 import { CATEGORY_CONFIG } from "../../types/expense";
+import styles from "./ExpenseItem.module.css";
+import { Trash2 } from "lucide-react";
 import type { Expense } from "../../types/expense";
 
 interface ExpenseItemProps {
@@ -11,35 +13,40 @@ export default function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
   const categoryInfo = CATEGORY_CONFIG[expense.category];
 
   return (
-    <li>
-      <div>
-        <strong>Descrição: </strong>
-        {expense.description} <br />
+    <li className={styles.expenseCard}>
+      <div className={styles.expenseInfo}>
+        <span className={styles.expenseLabel}>Descrição:</span>{" "}
+        <span className={styles.expenseValue}>{expense.description}</span>
       </div>
-      <div>
-        <strong>Valor:</strong> <span>{formatCurrency(expense.amount)}</span>{" "}
-        <br />
+      <div className={styles.expenseInfo}>
+        <span className={styles.expenseLabel}>Valor:</span>{" "}
+        <span className={styles.expenseValue}>
+          {formatCurrency(expense.amount)}
+        </span>
       </div>
-      <div>
-        <strong>Data:</strong>{" "}
-        <time dateTime={expense.date}>
+      <div className={styles.expenseInfo}>
+        <span className={styles.expenseLabel}>Data:</span>
+        <time dateTime={expense.date} className={styles.expenseValue}>
           {new Date(expense.date).toLocaleDateString("pt-BR")}
-        </time>{" "}
-        <br />
+        </time>
       </div>
-      <div>
-        <strong>Categoria:</strong>
-        <span style={{ color: categoryInfo.color }}>
+      <div className={styles.expenseInfo}>
+        <span className={styles.expenseLabel}>Categoria:</span>
+        <span
+          className={styles.expenseValue}
+          style={{ color: categoryInfo.color, fontWeight: "600" }}
+        >
           {categoryInfo.icon} {expense.category}
         </span>
-        <br />
       </div>
-      <div>
+
+      <div className={styles.buttonContainer}>
         <button
+          className={styles.deleteButton}
           onClick={() => onDelete(expense.id)}
           aria-label={`Deletar despesa ${expense.description}`}
         >
-          🗑️
+          <Trash2 size={18} />
         </button>
       </div>
     </li>
