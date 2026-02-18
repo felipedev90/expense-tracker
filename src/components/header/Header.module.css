@@ -1,0 +1,37 @@
+.headerContainer {
+  background: white;
+
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-lg);
+
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-gray-700);
+}
+
+@media (max-width: 720px) {
+  .headerContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .title h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    margin-top: 10px;
+  }
+}

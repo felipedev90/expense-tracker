@@ -1,0 +1,40 @@
+.summaryContainer {
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2xl);
+}
+
+.summaryInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+.summaryText {
+  color: var(--color-gray-700);
+  font-weight: 600;
+}
+
+.summarySpanExpense {
+  color: var(--color-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  padding: var(--space-sm);
+}
+
+.summarySpanTotal {
+  color: var(--color-success);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  padding: var(--space-sm);
+}

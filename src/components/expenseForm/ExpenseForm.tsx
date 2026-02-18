@@ -1,13 +1,7 @@
 import { useState } from "react";
-import type { ExpenseFormData, Category } from "../types/expense";
-
-const categories: Category[] = [
-  "Alimentação",
-  "Saúde",
-  "Lazer",
-  "Bike",
-  "Outros",
-];
+import styles from "./ExpenseForm.module.css";
+import { CATEGORY_CONFIG, categories } from "../../types/expense";
+import type { ExpenseFormData, Category } from "../../types/expense";
 
 interface ExpenseFormProps {
   addExpense: (expenseData: ExpenseFormData) => void;
@@ -48,39 +42,48 @@ export default function ExpenseForm({ addExpense }: ExpenseFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Descrição:</label>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <h2 className={styles.title}>Adicionar despesa:</h2>
+      <label className={styles.label}>Descrição:</label>
       <input
+        className={styles.input}
         placeholder="Descrição da despesa"
         type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <label>Valor:</label>
+      <label className={styles.label}>Valor:</label>
       <input
+        className={styles.input}
         placeholder="Valor da despesa"
         type="number"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <label>Data:</label>
+      <label className={styles.label}>Data:</label>
       <input
+        className={styles.input}
         type="date"
         value={date}
         onChange={(e) => setDate(e.target.value)}
       />
-      <label>Categoria:</label>
+      <label className={styles.label}>Categoria:</label>
       <select
+        className={styles.input}
         value={category}
         onChange={(e) => setCategory(e.target.value as Category)}
       >
         {categories.map((cat) => (
           <option key={cat} value={cat}>
-            {cat}
+            {CATEGORY_CONFIG[cat].icon} {cat}
           </option>
         ))}
       </select>
-      <button type="submit">Adicionar Despesa</button>
+      <div className={styles.buttonContainer}>
+        <button className={styles.buttonAdd} type="submit">
+          Adicionar Despesa
+        </button>
+      </div>
     </form>
   );
 }

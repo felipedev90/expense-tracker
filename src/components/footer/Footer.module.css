@@ -1,0 +1,54 @@
+.footer {
+  max-width: 90%;
+  margin: auto;
+  height: 100%;
+  padding: 20px;
+  color: #ffffff;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    var(--color-secondary) 100%
+  );
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.developerInfo {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.socialLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.followText {
+  font-size: 1.2rem;
+}
+
+.linkContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.link:hover {
+  color: #770000;
+}

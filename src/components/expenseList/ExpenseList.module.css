@@ -1,0 +1,16 @@
+.expenseListContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--space-sm);
+}
+.expenseTitle {
+  color: var(--color-gray-900);
+  font-size: var(--font-size-lg);
+}
+
+.expenseText {
+  color: var(--color-gray-900);
+  padding: var(--space-md);
+}
