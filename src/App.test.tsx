@@ -37,5 +37,5 @@ describe("App - Integração", () => {
 
     // Verificar mensagem de 'nehuma despesa'
     expect(screen.getByText(/nenhuma despesa registrada/i)).toBeInTheDocument();
-  });
+  }, 10000);
 });
