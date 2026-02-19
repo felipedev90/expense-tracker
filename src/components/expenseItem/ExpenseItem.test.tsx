@@ -27,8 +27,10 @@ describe("ExpenseItem", () => {
   });
 
   it("deve chamar onDelete quando o botão deletar é clicado", async () => {
+    // Configura o userEvent para simular interações do usuário
     const user = userEvent.setup();
 
+    // Renderiza o componente com os dados de teste e a função mockada
     render(<ExpenseItem expense={mockExpense} onDelete={mockOnDelete} />);
 
     // Encontra o botão (use getByRole ou GetByText)
@@ -37,6 +39,8 @@ describe("ExpenseItem", () => {
     // Simula o clique no botão
     await user.click(deleteButton);
 
+    // Verifica se a função mockada foi chamada exatamente uma vez
+    // Verifica se a função mockada foi chamada com o ID correto
     expect(mockOnDelete).toHaveBeenCalledTimes(1);
     expect(mockOnDelete).toHaveBeenCalledWith("123");
   });
