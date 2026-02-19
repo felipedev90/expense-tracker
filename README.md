@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# 💰 Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web para gerenciamento de despesas pessoais, desenvolvida com React, TypeScript e Vite.
 
-Currently, two official plugins are available:
+**[Ver projeto ao vivo](https://expense-tracker-tawny-beta-38.vercel.app/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Badge](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)
+![Badge](https://img.shields.io/badge/Testes-76%25%20Cobertura-success)
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ✅ Adicionar despesas com descrição, valor, data e categoria
+- ✅ Visualizar lista de despesas
+- ✅ Filtrar por categoria (Alimentação, Saúde, Lazer, Bike, Outros)
+- ✅ Filtrar por período (últimos 7 dias, 30 dias, todos)
+- ✅ Deletar despesas
+- ✅ Visualizar total de despesas e valor total gasto
+- ✅ Persistência local (LocalStorage)
+- ✅ Design responsivo
 
-## Expanding the ESLint configuration
+## Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** - Biblioteca UI
+- **TypeScript** - Tipagem estática
+- **Vite** - Build tool
+- **CSS Modules** - Estilização scoped
+- **Vitest** - Framework de testes
+- **Testing Library** - Testes de componentes
+- **Vercel** - Deploy e hospedagem
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Testes
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- 16 testes implementados
+- 76% de cobertura de código
+- Testes unitários e de integração
+- Cobertura de 100% em componentes críticos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm test           # Rodar testes
+npm run coverage   # Ver relatório de cobertura
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Como rodar localmente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Clone o repositório
+git clone https://github.com/felipedev90/expense-tracker.git
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Entre na pasta
+cd expense-tracker
+
+# Instale as dependências
+npm install
+
+# Rode o projeto
+npm run dev
 ```
+
+Acesse: `http://localhost:5173`
+
+## Build para produção
+
+```bash
+npm run build
+npm run preview  # Preview da build
+```
+
+## Autor
+
+**Felipe Augusto**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/felipesilva90/)
+[![GitHub](https://img.shields.io/badge/GitHub-black?style=flat&logo=github)](https://github.com/felipedev90)
+
+## Licença
+
+Este projeto está sob a licença MIT.
