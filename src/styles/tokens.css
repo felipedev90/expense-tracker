@@ -1,8 +1,8 @@
 :root {
   /* Cores principais */
-  --color-primary: #667eea;
-  --color-primary-dark: #5568d3;
-  --color-secondary: #764ba2;
+  --color-primary: #118288;
+  --color-primary-dark: #0f6d72;
+  --color-primary-light: #19a1a8;
 
   /* Cores neutras */
   --color-gray-50: #f9fafb;
@@ -43,5 +43,6 @@
   /* Sombras */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.1);
 }

@@ -1,7 +1,9 @@
+import { useState, useEffect, useRef } from "react";
+import { CalendarDays, Tags, Check, X } from "lucide-react";
 import styles from "./Filters.module.css";
+import { categories, CATEGORY_CONFIG } from "../../types/expense";
 import type { Category } from "../../types/expense";
 import type { Period } from "../../types/expense";
-import { categories, CATEGORY_CONFIG } from "../../types/expense";
 
 interface FiltersProps {
   selectedCategory: Category | "Todas";
@@ -10,49 +12,159 @@ interface FiltersProps {
   setSelectedPeriod: (period: Period) => void;
 }
 
+const periodOptions: Period[] = ["Todos", "Últimos 7 dias", "Últimos 30 dias"];
+
 export default function Filters({
   selectedCategory,
   setSelectedCategory,
   selectedPeriod,
   setSelectedPeriod,
 }: FiltersProps) {
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isPeriodOpen, setIsPeriodOpen] = useState(false);
+
+  const hasActiveFilters =
+    selectedCategory !== "Todas" || selectedPeriod !== "Todos";
+
+  const categoryMenuRef = useRef<HTMLDivElement | null>(null);
+  const periodMenuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        categoryMenuRef.current &&
+        !categoryMenuRef.current.contains(target)
+      ) {
+        setIsCategoryOpen(false);
+      }
+      if (periodMenuRef.current && !periodMenuRef.current.contains(target)) {
+        setIsPeriodOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={styles.filterContainer}>
-      <div className={styles.filterGroup}>
-        <label htmlFor="category" className={styles.filterLabel}>
-          Filtrar por categoria:
-        </label>
-        <select
-          id="category"
-          className={styles.filterSelect}
-          value={selectedCategory}
-          onChange={(e) =>
-            setSelectedCategory(e.target.value as Category | "Todas")
-          }
-        >
-          <option value="Todas">📊 Todas</option>
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {CATEGORY_CONFIG[category].icon} {category}
-            </option>
-          ))}
-        </select>
+      <div className={styles.actionsRow}>
+        <div className={styles.menuWrapper} ref={categoryMenuRef}>
+          <button
+            type="button"
+            className={`${styles.iconButton} ${
+              selectedCategory !== "Todas" ? styles.iconButtonActive : ""
+            }`}
+            onClick={() => {
+              setIsCategoryOpen((prev) => !prev);
+              setIsPeriodOpen(false);
+            }}
+            aria-label="Filtrar por categoria"
+            aria-expanded={isCategoryOpen}
+          >
+            <Tags size={18} />
+          </button>
+
+          {isCategoryOpen && (
+            <div className={styles.menuItem}>
+              <button
+                type="button"
+                className={styles.menuItem}
+                onClick={() => {
+                  setSelectedCategory("Todas");
+                  setIsCategoryOpen(false);
+                }}
+              >
+                <span> Todas </span>
+                {selectedCategory === "Todas" && <Check size={16} />}
+              </button>
+
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  className={styles.menuItem}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setIsCategoryOpen(false);
+                  }}
+                >
+                  <span>
+                    {CATEGORY_CONFIG[category].icon} {category}
+                  </span>
+                  {selectedCategory === category && <Check size={16} />}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={styles.menuWrapper} ref={categoryMenuRef}>
+          <button
+            type="button"
+            className={`${styles.iconButton} ${
+              selectedPeriod !== "Todos" ? styles.iconButtonActive : ""
+            }`}
+            onClick={() => {
+              setIsPeriodOpen((prev) => !prev);
+              setIsCategoryOpen(false);
+            }}
+            aria-label="Filtrar por período"
+            aria-expanded={isPeriodOpen}
+          >
+            <CalendarDays size={18} />
+          </button>
+
+          {isPeriodOpen && (
+            <div className={styles.menu}>
+              {periodOptions.map((period) => (
+                <button
+                  key={period}
+                  type="button"
+                  className={styles.menuItem}
+                  onClick={() => {
+                    setSelectedPeriod(period);
+                    setIsPeriodOpen(false);
+                  }}
+                >
+                  <span>{period}</span>
+                  {selectedPeriod === period && <Check size={16} />}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        {hasActiveFilters && (
+          <button
+            type="button"
+            className={styles.clearButton}
+            onClick={() => {
+              setSelectedCategory("Todas");
+              setSelectedPeriod("Todos");
+              setIsCategoryOpen(false);
+              setIsPeriodOpen(false);
+            }}
+            aria-label="Limpar filtros"
+            title="Limpar filtros"
+          >
+            <X size={16} />
+          </button>
+        )}
       </div>
 
-      <div className={styles.filterGroup}>
-        <label htmlFor="period" className={styles.filterLabel}>
-          Filtrar por período:
-        </label>
-        <select
-          id="period"
-          className={styles.filterSelect}
-          value={selectedPeriod}
-          onChange={(e) => setSelectedPeriod(e.target.value as Period)}
-        >
-          <option value="Todos">📅 Todos</option>
-          <option value="Últimos 7 dias">📅 Últimos 7 dias</option>
-          <option value="Últimos 30 dias">📅 Últimos 30 dias</option>
-        </select>
+      <div className={styles.activeFilters}>
+        {selectedCategory !== "Todas" && (
+          <span className={styles.badge}>
+            {CATEGORY_CONFIG[selectedCategory].icon} {selectedCategory}
+          </span>
+        )}
+
+        {selectedPeriod !== "Todos" && (
+          <span className={styles.badge}>{selectedPeriod}</span>
+        )}
       </div>
     </div>
   );

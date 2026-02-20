@@ -1,40 +1,45 @@
 .summaryContainer {
-  padding: var(--space-md);
-  margin-bottom: var(--space-lg);
   background: white;
+  border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  display: flex;
-  flex-direction: row;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--space-2xl);
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .summaryInfo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: column;
+  text-align: center;
 }
 
 .summaryText {
-  color: var(--color-gray-700);
+  font-size: var(--font-size-base);
   font-weight: 600;
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-xs);
 }
 
 .summarySpanExpense {
-  color: var(--color-primary);
   font-size: var(--font-size-2xl);
-  font-weight: 700;
-  padding: var(--space-sm);
+  font-weight: 800;
+  color: var(--color-gray-900);
 }
 
 .summarySpanTotal {
-  color: var(--color-success);
   font-size: var(--font-size-2xl);
-  font-weight: 700;
-  padding: var(--space-sm);
+  font-weight: 800;
+  color: var(--color-success);
+}
+
+@media (max-width: 720px) {
+  .summaryContainer {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: var(--space-md);
+  }
 }

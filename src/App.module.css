@@ -1,0 +1,24 @@
+.app {
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary) 0px,
+    var(--color-primary) 260px,
+    var(--color-gray-50) 260px,
+    var(--color-gray-50) 100%
+  );
+  padding: var(--space-lg) var(--space-md);
+}
+
+.pageContainer {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: -42px;
+}
