@@ -22,3 +22,10 @@
   gap: var(--space-md);
   margin-top: -42px;
 }
+
+@media (max-width: 768px) {
+  .mainContent {
+    margin-top: -28px;
+    gap: 1rem;
+  }
+}
