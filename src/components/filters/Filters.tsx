@@ -53,7 +53,10 @@ export default function Filters({
   return (
     <div className={styles.filterContainer}>
       <div className={styles.actionsRow}>
-        <div className={styles.menuWrapper} ref={categoryMenuRef}>
+        <div
+          className={`${styles.menuWrapper} ${styles.menuLeft}`}
+          ref={categoryMenuRef}
+        >
           <button
             type="button"
             className={`${styles.iconButton} ${
@@ -70,7 +73,7 @@ export default function Filters({
           </button>
 
           {isCategoryOpen && (
-            <div className={styles.menuItem}>
+            <div className={styles.menu}>
               <button
                 type="button"
                 className={styles.menuItem}
@@ -79,7 +82,7 @@ export default function Filters({
                   setIsCategoryOpen(false);
                 }}
               >
-                <span> Todas </span>
+                <span className={styles.menuItemText}> Todas </span>
                 {selectedCategory === "Todas" && <Check size={16} />}
               </button>
 
@@ -93,7 +96,7 @@ export default function Filters({
                     setIsCategoryOpen(false);
                   }}
                 >
-                  <span>
+                  <span className={styles.menuItemText}>
                     {CATEGORY_CONFIG[category].icon} {category}
                   </span>
                   {selectedCategory === category && <Check size={16} />}
@@ -102,7 +105,10 @@ export default function Filters({
             </div>
           )}
         </div>
-        <div className={styles.menuWrapper} ref={categoryMenuRef}>
+        <div
+          className={`${styles.menuWrapper} ${styles.menuRight}`}
+          ref={periodMenuRef}
+        >
           <button
             type="button"
             className={`${styles.iconButton} ${
@@ -130,7 +136,7 @@ export default function Filters({
                     setIsPeriodOpen(false);
                   }}
                 >
-                  <span>{period}</span>
+                  <span className={styles.menuItemText}>{period}</span>
                   {selectedPeriod === period && <Check size={16} />}
                 </button>
               ))}

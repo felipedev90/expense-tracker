@@ -71,9 +71,38 @@
 @media (max-width: 520px) {
   .expenseCard {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .expenseInfo {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .expenseLabel {
+    font-size: 0.72rem;
   }
 
   .expenseValue {
     white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    text-align: right;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .buttonContainer {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+
+  .deleteButton {
+    padding: 0.45rem;
   }
 }
