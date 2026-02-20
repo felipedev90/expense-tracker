@@ -43,6 +43,7 @@
   left: 0;
   z-index: 20;
   min-width: 220px;
+  max-width: calc(100vw - 32px);
   background: white;
   border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
@@ -64,6 +65,15 @@
   cursor: pointer;
   color: var(--color-gray-900);
   font-size: 0.92rem;
+
+  white-space: normal;
+}
+
+.menuItem span {
+  min-width: 0;
+  flex: 1;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .menuItem:hover {
@@ -124,7 +134,9 @@
 
 @media (max-width: 768px) {
   .menu {
+    left: auto;
+    right: 0;
     min-width: 200px;
-    left: 0;
+    max-width: min(260px, calc(100vw - 24px));
   }
 }
