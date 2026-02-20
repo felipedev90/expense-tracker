@@ -11,7 +11,7 @@ import type {
   Period,
 } from "./types/expense";
 import ExpenseSummary from "./components/expenseSummary/ExpenseSummary";
-import Filters from "./components/filters/Filters";
+import styles from "./App.module.css";
 
 function App() {
   const [expenses, setExpenses] = useLocalStorage<Expense[]>(
@@ -74,29 +74,31 @@ function App() {
   );
 
   return (
-    <div>
-      <Header />
-      <ExpenseSummary
-        totalExpenses={filteredExpenses.length}
-        totalAmount={totalDeGastos}
-      />
+    <div className={styles.app}>
+      <div className={styles.pageContainer}>
+        <Header />
 
-      <ExpenseForm addExpense={addExpenseHandler} />
+        <main className={styles.mainContent}>
+          <ExpenseSummary
+            totalExpenses={filteredExpenses.length}
+            totalAmount={totalDeGastos}
+          />
 
-      {expenses.length > 0 && (
-        <Filters
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedPeriod={selectedPeriod}
-          setSelectedPeriod={setSelectedPeriod}
-        />
-      )}
-      <ExpenseList
-        expenses={filteredExpenses}
-        onDelete={deleteExpenseHandler}
-      />
+          <ExpenseForm addExpense={addExpenseHandler} />
 
-      <Footer />
+          <ExpenseList
+            expenses={filteredExpenses}
+            onDelete={deleteExpenseHandler}
+            showFilters={expenses.length > 0}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedPeriod={selectedPeriod}
+            setSelectedPeriod={setSelectedPeriod}
+          />
+        </main>
+
+        <Footer />
+      </div>
     </div>
   );
 }

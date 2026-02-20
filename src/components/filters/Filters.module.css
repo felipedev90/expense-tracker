@@ -1,46 +1,130 @@
 .filterContainer {
-  width: 100%;
-
-  margin: 0 auto;
-  background-color: var(--color-gray-100);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  margin-bottom: var(--space-xs);
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
-  justify-content: center;
-  gap: var(--space-sm);
-
-  align-items: center;
-  box-shadow: var(--shadow-sm);
-}
-
-.filterGroup {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  font-weight: 600;
-  padding: var(--space-sm);
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
-.filterLabel {
-  display: block;
-  font-weight: 600;
-  color: var(--color-gray-700);
-  margin-bottom: var(--space-xs);
-  font-size: var(--font-size-base);
-  text-align: center;
+.menuWrapper {
+  position: relative;
 }
 
-.filterSelect {
-  width: 100%;
-  padding: var(--space-xs);
-  border: 2px solid var(--color-gray-900);
+.iconButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
   background: white;
+  color: var(--color-gray-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
+}
+
+.iconButton:hover {
+  border-color: var(--color-primary);
+  background: var(--color-gray-50);
+}
+
+.iconButton:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(17, 130, 136, 0.15);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  z-index: 20;
+  min-width: 220px;
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.35rem;
+}
+
+.menuItem {
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-gray-900);
+  font-size: 0.92rem;
+}
+
+.menuItem:hover {
+  background: var(--color-gray-50);
+}
+
+.iconButtonActive {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(17, 130, 136, 0.08);
+}
+
+.clearButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-md);
+  background: white;
+  color: var(--color-error);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.clearButton:hover {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.activeFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--color-gray-200);
+  background: var(--color-gray-50);
+  color: var(--color-gray-700);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    min-width: 200px;
+    left: 0;
+  }
 }

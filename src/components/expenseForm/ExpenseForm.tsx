@@ -44,53 +44,66 @@ export default function ExpenseForm({ addExpense }: ExpenseFormProps) {
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <h2 className={styles.title}>Adicionar despesa:</h2>
-      <label htmlFor="description" className={styles.label}>
-        Descrição:
-      </label>
-      <input
-        id="description"
-        className={styles.input}
-        placeholder="Descrição da despesa"
-        type="text"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <label htmlFor="amount" className={styles.label}>
-        Valor:
-      </label>
-      <input
-        id="amount"
-        className={styles.input}
-        placeholder="Valor da despesa"
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <label htmlFor="date" className={styles.label}>
-        Data:
-      </label>
-      <input
-        id="date"
-        className={styles.input}
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <label htmlFor="category" className={styles.label}>
-        Categoria:
-      </label>
-      <select
-        id="category"
-        className={styles.input}
-        value={category}
-        onChange={(e) => setCategory(e.target.value as Category)}
-      >
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {CATEGORY_CONFIG[cat].icon} {cat}
-          </option>
-        ))}
-      </select>
+
+      <div className={`${styles.field} ${styles.descriptionField}`}>
+        <label htmlFor="description" className={styles.label}>
+          Descrição:
+        </label>
+        <input
+          id="description"
+          className={styles.input}
+          placeholder="Descrição da despesa"
+          type="text"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+
+      <div className={`${styles.field} ${styles.amountField}`}>
+        <label htmlFor="amount" className={styles.label}>
+          Valor:
+        </label>
+        <input
+          id="amount"
+          className={styles.input}
+          placeholder="Valor da despesa"
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+      </div>
+
+      <div className={`${styles.field} ${styles.dateField}`}>
+        <label htmlFor="date" className={styles.label}>
+          Data:
+        </label>
+        <input
+          id="date"
+          className={styles.input}
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+
+      <div className={`${styles.field} ${styles.categoryField}`}>
+        <label htmlFor="category" className={styles.label}>
+          Categoria:
+        </label>
+        <select
+          id="category"
+          className={styles.input}
+          value={category}
+          onChange={(e) => setCategory(e.target.value as Category)}
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {CATEGORY_CONFIG[cat].icon} {cat}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className={styles.buttonContainer}>
         <button className={styles.buttonAdd} type="submit">
           Adicionar Despesa

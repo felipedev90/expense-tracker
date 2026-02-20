@@ -1,93 +1,79 @@
 .expenseCard {
   list-style: none;
-  background-color: var(--color-gray-100);
   border: 1px solid var(--color-gray-200);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  margin-bottom: var(--space-sm);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  background: #fff;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--space-sm);
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr auto;
+  gap: 0.75rem;
   align-items: center;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
   box-shadow: var(--shadow-sm);
-}
-
-.expenseCard:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-primary);
 }
 
 .expenseInfo {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-bottom: var(--space-xs);
-}
-
-/* Estilo para a linha da descrição (Destaque) */
-.expenseInfo:first-child .expenseValue {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-gray-900);
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .expenseLabel {
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 700;
   color: var(--color-gray-700);
-  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .expenseValue {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
+  font-size: 0.98rem;
   color: var(--color-gray-900);
-}
-
-/* Destaque especial para o valor financeiro */
-.expenseInfo:nth-child(2) .expenseValue {
-  color: var(--color-primary);
-  font-weight: 700;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .buttonContainer {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .deleteButton {
-  background-color: transparent;
-  border: 1px solid var(--color-gray-200);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  color: var(--color-error);
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.2s ease;
-  display: flex;
+  border-radius: var(--radius-sm);
+  padding: 0.35rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
 .deleteButton:hover {
-  background-color: var(--color-error);
-  border-color: var(--color-error);
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
 }
 
-@media (min-width: 640px) {
+@media (max-width: 860px) {
   .expenseCard {
-    grid-template-columns: 2fr 1fr 1fr 1.5fr auto;
-    gap: var(--space-md);
+    grid-template-columns: 1fr 1fr;
   }
 
-  .expenseInfo {
-    margin-bottom: 0;
+  .buttonContainer {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 520px) {
+  .expenseCard {
+    grid-template-columns: 1fr;
+  }
+
+  .expenseValue {
+    white-space: normal;
   }
 }
