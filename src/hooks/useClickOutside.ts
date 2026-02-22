@@ -6,8 +6,8 @@ Hook que detecta cliques fora de um elemento.
 @param handler - Função executada quando clica fora
 */
 
-export function useClickOutside(
-  ref: RefObject<HTMLElement>,
+export function useClickOutside<T extends HTMLElement>(
+  ref: RefObject<T>,
   handler: () => void,
 ) {
   useEffect(() => {

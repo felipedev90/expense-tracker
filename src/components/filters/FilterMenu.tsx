@@ -3,14 +3,14 @@ import styles from "./Filters.module.css";
 
 interface FilterMenuProps<T> {
   options: readonly T[];
-  selctedValue: T;
+  selectedValue: T;
   onSelect: (value: T) => void;
   renderOption: (option: T) => React.ReactNode;
 }
 
 export function FilterMenu<T extends string>({
   options,
-  selctedValue,
+  selectedValue,
   onSelect,
   renderOption,
 }: FilterMenuProps<T>) {
@@ -25,7 +25,7 @@ export function FilterMenu<T extends string>({
         >
           <span className={styles.menuItemText}>{renderOption(option)}</span>
 
-          {selctedValue === option && <Check size={16} />}
+          {selectedValue === option && <Check size={16} />}
         </button>
       ))}
     </div>
