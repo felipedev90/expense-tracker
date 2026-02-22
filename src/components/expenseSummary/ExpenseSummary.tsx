@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/currencyFormatter";
+import { formatCurrency } from "../../utils/formatters";
 import styles from "./ExpenseSummary.module.css";
 
 export default function ExpenseSummary({
