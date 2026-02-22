@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { CalendarDays, Tags, Check, X } from "lucide-react";
 import styles from "./Filters.module.css";
 import { categories, CATEGORY_CONFIG } from "../../types/expense";
-import type { Category } from "../../types/expense";
-import type { Period } from "../../types/expense";
+import type { Category, Period } from "../../types/expense";
 
 interface FiltersProps {
   selectedCategory: Category | "Todas";
