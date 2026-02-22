@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/currencyFormatter";
+import { formatCurrency, formatDate } from "../../utils/formatters";
 import { CATEGORY_CONFIG } from "../../types/expense";
 import styles from "./ExpenseItem.module.css";
 import { Trash2 } from "lucide-react";
@@ -27,7 +27,7 @@ export default function ExpenseItem({ expense, onDelete }: ExpenseItemProps) {
       <div className={styles.expenseInfo}>
         <span className={styles.expenseLabel}>Data:</span>
         <time dateTime={expense.date} className={styles.expenseValue}>
-          {new Date(expense.date).toLocaleDateString("pt-BR")}
+          {formatDate(expense.date)}
         </time>
       </div>
       <div className={styles.expenseInfo}>

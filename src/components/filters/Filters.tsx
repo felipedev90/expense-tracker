@@ -1,9 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import { CalendarDays, Tags, Check, X } from "lucide-react";
+import { useState, useRef } from "react";
+import { CalendarDays, Tags, X } from "lucide-react";
 import styles from "./Filters.module.css";
 import { categories, CATEGORY_CONFIG } from "../../types/expense";
-import type { Category } from "../../types/expense";
-import type { Period } from "../../types/expense";
+import type { Category, Period } from "../../types/expense";
+
+import { FilterButton } from "./FilterButton";
+import { FilterMenu } from "./FilterMenu";
+import { FilterBadge } from "./FilterBadge";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 interface FiltersProps {
   selectedCategory: Category | "Todas";
@@ -22,155 +26,96 @@ export default function Filters({
   setSelectedPeriod,
 }: FiltersProps) {
   // Estado local da UI
-  // Controla se o menu de categoria está aberto ou fechado
+  // Controla abertura/fechamento dos menus dropdown
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isPeriodOpen, setIsPeriodOpen] = useState(false);
 
-  // Estado derivado (calculado)
-  // true se qualquer filtro estiver ativo.
+  // Verifica se há filtros ativos (para mostrar botão limpar)
   const hasActiveFilters =
     selectedCategory !== "Todas" || selectedPeriod !== "Todos";
 
   // Refs para detectar clique fora dos menus
   // Apontam para os wrappers que contem botão + menu
-  const categoryMenuRef = useRef<HTMLDivElement | null>(null);
-  const periodMenuRef = useRef<HTMLDivElement | null>(null);
+  const categoryMenuRef = useRef<HTMLDivElement>(null);
+  const periodMenuRef = useRef<HTMLDivElement>(null);
 
-  // Fecha menu ao clicar fora
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const target = event.target as Node;
-
-      // Se clicou fora do menu de categoria, fecha ele
-      if (
-        categoryMenuRef.current &&
-        !categoryMenuRef.current.contains(target)
-      ) {
-        setIsCategoryOpen(false);
-      }
-
-      // Se clicou fora do menu de período, fecha ele
-      if (periodMenuRef.current && !periodMenuRef.current.contains(target)) {
-        setIsPeriodOpen(false);
-      }
-    }
-
-    // Adiciona listener global para detectar clique fora dos menus
-    document.addEventListener("mousedown", handleClickOutside);
-
-    // Remove listener ao desmontar componente para evitar vazamento de memória (cleanup)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  // Fecha menus ao clicar fora (custom hook)
+  // @ts-expect-error - Incompatibilidade de tipos genéricos, mas funciona corretamente
+  useClickOutside(categoryMenuRef, () => setIsCategoryOpen(false));
+  // @ts-expect-error - Incompatibilidade de tipos genéricos, mas funciona corretamente
+  useClickOutside(periodMenuRef, () => setIsPeriodOpen(false));
 
   return (
     <div className={styles.filterContainer}>
+      {/* === LINHA DE AÇÕES (Botões de filtro) === */}
       <div className={styles.actionsRow}>
+        {/* FILTRO DE CATEGORIA */}
         <div
           className={`${styles.menuWrapper} ${styles.menuLeft}`}
           ref={categoryMenuRef}
         >
-          <button
-            type="button"
-            // Se categoria ativa != "Todas", aplica estilo ativo
-            className={`${styles.iconButton} ${
-              selectedCategory !== "Todas" ? styles.iconButtonActive : ""
-            }`}
+          {/* Botão que abre e fecha o menu de categoria */}
+          <FilterButton
+            icon={Tags}
+            isActive={selectedCategory !== "Todas"}
+            isOpen={isCategoryOpen}
             onClick={() => {
-              // Alterna abertura do menu de categoria
-              // Fecha menu de período para garantir que só um menu esteja aberto
               setIsCategoryOpen((prev) => !prev);
-              setIsPeriodOpen(false);
+              setIsPeriodOpen(false); // Fecha o outro menu
             }}
-            aria-label="Filtrar por categoria"
-            aria-expanded={isCategoryOpen}
-          >
-            <Tags size={18} />
-          </button>
+            label="Filtrar por categoria"
+          />
 
-          {/* Renderização condicional: só mostra o menu se estiver aberto */}
+          {/* Menu dropdown (renderiza condicionalmente) */}
           {isCategoryOpen && (
-            <div className={styles.menu}>
-              {/* Opção 'Todas' (reseta o filtro de categoria*/}
-              <button
-                type="button"
-                className={styles.menuItem}
-                onClick={() => {
-                  setSelectedCategory("Todas");
-                  setIsCategoryOpen(false); // Fecha o menu após selecionar a opção
-                }}
-              >
-                <span className={styles.menuItemText}> Todas </span>
-
-                {/* Mostra check se essa opção for a selecionada */}
-                {selectedCategory === "Todas" && <Check size={16} />}
-              </button>
-
-              {/* Renderiza todas as categorias dinamicamente */}
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  type="button"
-                  className={styles.menuItem}
-                  onClick={() => {
-                    setSelectedCategory(category); // Aplica filtro no App
-                    setIsCategoryOpen(false); // Fecha o menu após selecionar a opção
-                  }}
-                >
-                  <span className={styles.menuItemText}>
-                    {CATEGORY_CONFIG[category].icon} {category}
-                  </span>
-
-                  {/* Check ao lado da categoria ativa */}
-                  {selectedCategory === category && <Check size={16} />}
-                </button>
-              ))}
-            </div>
+            <FilterMenu
+              options={["Todas", ...categories]}
+              selectedValue={selectedCategory}
+              onSelect={(cat) => {
+                setSelectedCategory(cat);
+                setIsCategoryOpen(false);
+              }}
+              renderOption={(cat) =>
+                cat === "Todas"
+                  ? "Todas"
+                  : `${CATEGORY_CONFIG[cat].icon} ${cat}`
+              }
+            />
           )}
         </div>
+
+        {/* FILTRO DE PERÍODO */}
         <div
           className={`${styles.menuWrapper} ${styles.menuRight}`}
           ref={periodMenuRef}
         >
-          <button
-            type="button"
-            // Se período ativo != "Todos", aplica estilo ativo
-            className={`${styles.iconButton} ${
-              selectedPeriod !== "Todos" ? styles.iconButtonActive : ""
-            }`}
+          {/* Botão que abre e fecha o menu de período */}
+          <FilterButton
+            icon={CalendarDays}
+            isActive={selectedPeriod !== "Todos"}
+            isOpen={isPeriodOpen}
             onClick={() => {
-              setIsPeriodOpen((prev) => !prev); // Alterna abertura do menu de período
-              setIsCategoryOpen(false); // Fecha menu de categoria para garantir que só um menu esteja aberto
+              setIsPeriodOpen((prev) => !prev);
+              setIsCategoryOpen(false);
             }}
-            aria-label="Filtrar por período"
-            aria-expanded={isPeriodOpen}
-          >
-            <CalendarDays size={18} />
-          </button>
+            label="Filtrar por período"
+          />
 
-          {/* Menu de periodo condicional */}
+          {/* Menu dropdown (renderiza condicionalmente) */}
           {isPeriodOpen && (
-            <div className={styles.menu}>
-              {periodOptions.map((period) => (
-                <button
-                  key={period}
-                  type="button"
-                  className={styles.menuItem}
-                  onClick={() => {
-                    setSelectedPeriod(period); // Aplica filtro no App
-                    setIsPeriodOpen(false);
-                  }}
-                >
-                  <span className={styles.menuItemText}>{period}</span>
-                  {selectedPeriod === period && <Check size={16} />}
-                </button>
-              ))}
-            </div>
+            <FilterMenu
+              options={periodOptions}
+              selectedValue={selectedPeriod}
+              onSelect={(period) => {
+                setSelectedPeriod(period);
+                setIsPeriodOpen(false);
+              }}
+              renderOption={(period) => period}
+            />
           )}
         </div>
 
-        {/* Botão limpar filtros: Só aparece se tiver algum filtro ativo */}
+        {/* Botão de limpar filtros (Só aparece se tiver filtro ativo)*/}
         {hasActiveFilters && (
           <button
             type="button"
@@ -191,17 +136,15 @@ export default function Filters({
         )}
       </div>
 
-      {/* Área de badges com filtros ativos (feedback visual) */}
+      {/* BADGES DE FILTROS ATIVOS (Feedback visual) */}
       <div className={styles.activeFilters}>
-        {/* Badge de categoria só aparece se não for "Todas" */}
         {selectedCategory !== "Todas" && (
-          <span className={styles.badge}>
+          <FilterBadge>
             {CATEGORY_CONFIG[selectedCategory].icon} {selectedCategory}
-          </span>
+          </FilterBadge>
         )}
-        {/* Badge de categoria só aparece se não for "Todas" */}
         {selectedPeriod !== "Todos" && (
-          <span className={styles.badge}>{selectedPeriod}</span>
+          <FilterBadge>{selectedPeriod}</FilterBadge>
         )}
       </div>
     </div>

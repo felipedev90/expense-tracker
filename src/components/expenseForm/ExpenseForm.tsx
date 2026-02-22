@@ -11,10 +11,12 @@ export default function ExpenseForm({ addExpense }: ExpenseFormProps) {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState<Category>("Outros");
-  const [date, setDate] = useState(() => {
+  const [date, setDate] = useState(getTodayDate());
+
+  function getTodayDate() {
     const today = new Date();
     return today.toISOString().split("T")[0];
-  });
+  }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,7 +39,7 @@ export default function ExpenseForm({ addExpense }: ExpenseFormProps) {
 
     setDescription("");
     setAmount("");
-    setDate("");
+    setDate(getTodayDate());
     setCategory("Outros");
   }
 
