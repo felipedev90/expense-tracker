@@ -4,6 +4,7 @@ Aplicação web moderna para gerenciamento de despesas pessoais, desenvolvida co
 
 **[Ver projeto ao vivo](https://expense-tracker-tawny-beta-38.vercel.app/)**
 
+![CI](https://github.com/felipedev90/expense-tracker/actions/workflows/main.yml/badge.svg)
 ![Badge](https://img.shields.io/badge/Status-Concluído-success)
 ![Badge](https://img.shields.io/badge/Testes-76%25%20Cobertura-success)
 ![Badge](https://img.shields.io/badge/TypeScript-100%25-blue)
@@ -78,6 +79,23 @@ npm run coverage   # Gerar relatório de cobertura
 - ✅ Custom Hooks (72%)
 - ✅ Componentes críticos (100%)
 - ✅ Fluxo de integração completo
+
+## CI/CD Pipeline
+
+Este projeto utiliza **GitHub Actions** para integração e entrega contínuas.
+
+### Integração Contínua (CI)
+
+Executada automaticamente em todo push e pull request para `main`:
+
+1. Instalar dependências (`npm ci`)
+2. Lint (`npm run lint`)
+3. Testes (`npm run test`)
+4. Build (`npm run build`)
+
+### Deploy Automático (CD)
+
+Após o CI passar com sucesso na branch `main`, o deploy é feito automaticamente na **Vercel** via GitHub Actions.
 
 ## Como rodar localmente
 
@@ -155,10 +173,6 @@ Desenvolvedor Front-end
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/felipesilva90/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/felipedev90)
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
